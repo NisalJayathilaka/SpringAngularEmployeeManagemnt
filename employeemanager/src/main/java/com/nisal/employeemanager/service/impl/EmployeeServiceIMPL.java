@@ -6,6 +6,8 @@ import com.nisal.employeemanager.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class EmployeeServiceIMPL implements EmployeeService {
 
@@ -18,5 +20,16 @@ public class EmployeeServiceIMPL implements EmployeeService {
     @Override
     public EmployeeEntity saveEmployee(EmployeeEntity employeeEntity) {
         return employeeRepository.save(employeeEntity);
+    }
+
+    @Override
+    public List<EmployeeEntity> getAllEmployee() {
+        return employeeRepository.findAll();
+    }
+
+    @Override
+    public String deleteEmployeeById(int id) {
+        
+        return "null";
     }
 }
