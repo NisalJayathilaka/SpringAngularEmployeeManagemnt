@@ -4,6 +4,7 @@ import com.nisal.employeemanager.dto.CreateEmployeeDTO;
 import com.nisal.employeemanager.entity.EmployeeEntity;
 import com.nisal.employeemanager.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,4 +34,10 @@ public class EmployeeController {
     public String deleteEmployeeById(@PathVariable int employeeId){
         return employeeService.deleteEmployeeById(employeeId);
     }
+
+    @GetMapping("/{employeeId}")
+    public ResponseEntity<EmployeeEntity> getEmployeeById(@PathVariable int employeeId){
+        return employeeService.getEmployeeById(employeeId);
+    }
+
 }

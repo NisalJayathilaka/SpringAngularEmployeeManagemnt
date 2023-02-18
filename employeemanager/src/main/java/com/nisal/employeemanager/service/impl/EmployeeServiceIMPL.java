@@ -4,9 +4,12 @@ import com.nisal.employeemanager.entity.EmployeeEntity;
 import com.nisal.employeemanager.repo.EmployeeRepository;
 import com.nisal.employeemanager.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EmployeeServiceIMPL implements EmployeeService {
@@ -28,12 +31,23 @@ public class EmployeeServiceIMPL implements EmployeeService {
     }
 
     @Override
-    public String deleteEmployeeById(int id) {
-        if(employeeRepository.existsById(id)){
-            employeeRepository.deleteById(id);
+    public String deleteEmployeeById(int employeeId) {
+        if(employeeRepository.existsById(employeeId)){
+            employeeRepository.deleteById(employeeId);
             return "SuccessFully Deleted";
         }else{
             return "There is no Employee";
         }
+    }
+
+    @Override
+    public ResponseEntity<EmployeeEntity> getEmployeeById(int employeeId) {
+       Optional <EmployeeEntity> employeeEntity = employeeRepository.findById(employeeId);
+
+         if(employeeEntity.isPresent()){
+             return new ResponseEntity<>(employeeEntity.get(), HttpStatus.OK);
+         }else{
+             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+         }
     }
 }
