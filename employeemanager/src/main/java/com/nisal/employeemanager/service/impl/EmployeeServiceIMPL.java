@@ -29,7 +29,11 @@ public class EmployeeServiceIMPL implements EmployeeService {
 
     @Override
     public String deleteEmployeeById(int id) {
-        
-        return "null";
+        if(employeeRepository.existsById(id)){
+            employeeRepository.deleteById(id);
+            return "SuccessFully Deleted";
+        }else{
+            return "There is no Employee";
+        }
     }
 }
