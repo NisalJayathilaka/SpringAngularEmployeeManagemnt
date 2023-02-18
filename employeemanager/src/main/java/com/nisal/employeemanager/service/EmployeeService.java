@@ -1,6 +1,6 @@
 package com.nisal.employeemanager.service;
 
-import com.nisal.employeemanager.dto.CreateEmployeeDTO;
+import com.nisal.employeemanager.dto.UpdateEmployeeDTO;
 import com.nisal.employeemanager.entity.EmployeeEntity;
 import org.springframework.http.ResponseEntity;
 
@@ -14,4 +14,7 @@ public interface EmployeeService {
     String deleteEmployeeById(int employeeId);
 
     ResponseEntity<EmployeeEntity> getEmployeeById(int employeeId);
+
+
+    String updateEmployee(int employeeId, UpdateEmployeeDTO updateEmployeeDTO);
 }

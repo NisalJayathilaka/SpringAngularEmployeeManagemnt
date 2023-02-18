@@ -1,8 +1,6 @@
 package com.nisal.employeemanager.dto;
 
-import javax.persistence.Column;
-
-public class CreateEmployeeDTO {
+public class UpdateEmployeeDTO {
 
     private String employeeName;
     private String employeeEmail;
@@ -11,10 +9,10 @@ public class CreateEmployeeDTO {
     private String employeeImageUrl;
     private String employeeCode;
 
-    public CreateEmployeeDTO() {
+    public UpdateEmployeeDTO() {
     }
 
-    public CreateEmployeeDTO(String employeeName, String employeeEmail, String employeeJobTitle, String employeePhone, String employeeImageUrl, String employeeCode) {
+    public UpdateEmployeeDTO(String employeeName, String employeeEmail, String employeeJobTitle, String employeePhone, String employeeImageUrl, String employeeCode) {
         this.employeeName = employeeName;
         this.employeeEmail = employeeEmail;
         this.employeeJobTitle = employeeJobTitle;

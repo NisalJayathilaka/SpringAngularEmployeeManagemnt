@@ -1,6 +1,6 @@
 package com.nisal.employeemanager.controller;
 
-import com.nisal.employeemanager.dto.CreateEmployeeDTO;
+import com.nisal.employeemanager.dto.UpdateEmployeeDTO;
 import com.nisal.employeemanager.entity.EmployeeEntity;
 import com.nisal.employeemanager.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +38,11 @@ public class EmployeeController {
     @GetMapping("/{employeeId}")
     public ResponseEntity<EmployeeEntity> getEmployeeById(@PathVariable int employeeId){
         return employeeService.getEmployeeById(employeeId);
+    }
+
+    @PutMapping("/{employeeId}")
+    public String updateEmployee(@PathVariable int employeeId,@RequestBody UpdateEmployeeDTO updateEmployeeDTO){
+        return employeeService.updateEmployee(employeeId,updateEmployeeDTO);
     }
 
 }

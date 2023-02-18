@@ -1,5 +1,6 @@
 package com.nisal.employeemanager.service.impl;
 
+import com.nisal.employeemanager.dto.UpdateEmployeeDTO;
 import com.nisal.employeemanager.entity.EmployeeEntity;
 import com.nisal.employeemanager.repo.EmployeeRepository;
 import com.nisal.employeemanager.service.EmployeeService;
@@ -50,4 +51,27 @@ public class EmployeeServiceIMPL implements EmployeeService {
              return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
          }
     }
+
+    @Override
+    public String updateEmployee(int employeeId, UpdateEmployeeDTO updateEmployeeDTO) {
+        if(employeeRepository.existsById(employeeId)){
+            EmployeeEntity employeeEntity = employeeRepository.getReferenceById(employeeId);
+            System.out.println(employeeEntity);
+            employeeEntity.setEmployeeName(updateEmployeeDTO.getEmployeeName());
+            employeeEntity.setEmployeeEmail(updateEmployeeDTO.getEmployeeEmail());
+            employeeEntity.setEmployeeJobTitle(updateEmployeeDTO.getEmployeeJobTitle());
+            employeeEntity.setEmployeePhone(updateEmployeeDTO.getEmployeePhone());
+            employeeEntity.setEmployeeImageUrl(updateEmployeeDTO.getEmployeeImageUrl());
+            employeeEntity.setEmployeeCode(updateEmployeeDTO.getEmployeeCode());
+
+            employeeRepository.save(employeeEntity);
+            return "Employee Updated ";
+        }else{
+            return "There is no employee" + employeeId;
+        }
+
+
+
+    }
+
 }
