@@ -17,4 +17,7 @@ public interface EmployeeService {
 
 
     String updateEmployee(int employeeId, UpdateEmployeeDTO updateEmployeeDTO);
+
+
+    List<EmployeeEntity> getEmployeeByName(String employeeName);
 }

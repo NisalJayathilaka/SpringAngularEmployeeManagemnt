@@ -69,9 +69,14 @@ public class EmployeeServiceIMPL implements EmployeeService {
         }else{
             return "There is no employee" + employeeId;
         }
+    }
 
+    @Override
+    public List<EmployeeEntity> getEmployeeByName(String employeeName) {
+        return employeeRepository.findByEmployeeName(employeeName);
 
 
     }
+
 
 }

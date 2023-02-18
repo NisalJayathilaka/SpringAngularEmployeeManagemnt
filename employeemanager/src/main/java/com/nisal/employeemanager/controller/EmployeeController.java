@@ -45,4 +45,9 @@ public class EmployeeController {
         return employeeService.updateEmployee(employeeId,updateEmployeeDTO);
     }
 
+    @GetMapping("/employeeName")
+    public List<EmployeeEntity> getEmployeeByName(@RequestParam String employeeName){
+        return employeeService.getEmployeeByName(employeeName);
+    }
+
 }
