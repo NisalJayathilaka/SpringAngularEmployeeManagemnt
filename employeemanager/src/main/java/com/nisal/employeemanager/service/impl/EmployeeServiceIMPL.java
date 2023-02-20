@@ -53,23 +53,10 @@ public class EmployeeServiceIMPL implements EmployeeService {
     }
 
     @Override
-    public String updateEmployee(int employeeId, UpdateEmployeeDTO updateEmployeeDTO) {
-        if(employeeRepository.existsById(employeeId)){
-            EmployeeEntity employeeEntity = employeeRepository.getReferenceById(employeeId);
-            System.out.println(employeeEntity);
-            employeeEntity.setEmployeeName(updateEmployeeDTO.getEmployeeName());
-            employeeEntity.setEmployeeEmail(updateEmployeeDTO.getEmployeeEmail());
-            employeeEntity.setEmployeeJobTitle(updateEmployeeDTO.getEmployeeJobTitle());
-            employeeEntity.setEmployeePhone(updateEmployeeDTO.getEmployeePhone());
-            employeeEntity.setEmployeeImageUrl(updateEmployeeDTO.getEmployeeImageUrl());
-            employeeEntity.setEmployeeCode(updateEmployeeDTO.getEmployeeCode());
-
-            employeeRepository.save(employeeEntity);
-            return "Employee Updated ";
-        }else{
-            return "There is no employee" + employeeId;
-        }
+    public EmployeeEntity updateEmployee(EmployeeEntity employeeEntity) {
+        return employeeRepository.save(employeeEntity);
     }
+
 
     @Override
     public List<EmployeeEntity> getEmployeeByName(String employeeName) {

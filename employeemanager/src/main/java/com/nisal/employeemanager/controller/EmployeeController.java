@@ -4,6 +4,7 @@ import com.nisal.employeemanager.dto.UpdateEmployeeDTO;
 import com.nisal.employeemanager.entity.EmployeeEntity;
 import com.nisal.employeemanager.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,9 +41,10 @@ public class EmployeeController {
         return employeeService.getEmployeeById(employeeId);
     }
 
-    @PutMapping("/{employeeId}")
-    public String updateEmployee(@PathVariable int employeeId,@RequestBody UpdateEmployeeDTO updateEmployeeDTO){
-        return employeeService.updateEmployee(employeeId,updateEmployeeDTO);
+    @PutMapping("/update")
+    public ResponseEntity<EmployeeEntity> updateEmployee(@RequestBody EmployeeEntity employeeEntity) {
+        EmployeeEntity updateEmployee = employeeService.updateEmployee(employeeEntity);
+        return new ResponseEntity<>(updateEmployee, HttpStatus.OK);
     }
 
     @GetMapping("/employeeName")
