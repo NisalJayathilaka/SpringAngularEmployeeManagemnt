@@ -12,6 +12,7 @@ import { NgForm } from '@angular/forms';
 export class AppComponent implements OnInit{
   employees: Employee[] = [];
   public editEmployee!: Employee;
+  public deleteEmployee!: Employee;
 
    constructor(private employeeService : EmployeeService){}
 
@@ -60,6 +61,35 @@ export class AppComponent implements OnInit{
     );
    }
 
+   public onDeleteEmloyee(employeeId: number): void {
+    this.employeeService.deleteEmployee(employeeId).subscribe(
+      (response: void) => {
+        console.log(response);
+        this.getEmployees();
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+  }
+
+  public searchEmployees(key: string): void {
+    console.log(key);
+    const results: Employee[] = [];
+    for (const employee of this.employees) {
+      if (employee.employeeName.toLowerCase().indexOf(key.toLowerCase()) !== -1
+      || employee.employeeEmail.toLowerCase().indexOf(key.toLowerCase()) !== -1
+      || employee.employeePhone.toLowerCase().indexOf(key.toLowerCase()) !== -1
+      || employee.employeeJobTitle.toLowerCase().indexOf(key.toLowerCase()) !== -1) {
+        results.push(employee);
+      }
+    }
+    this.employees = results;
+    if (results.length === 0 || !key) {
+      this.getEmployees();
+    }
+  }
+
 
    public onOpenModal(employee:any,mode: string): void {
     const container = document.getElementById('main-container');
@@ -75,6 +105,7 @@ export class AppComponent implements OnInit{
       button.setAttribute('data-target', '#updateEmployeeModal');
     }
     if (mode === 'delete') {
+      this.deleteEmployee = employee;
       button.setAttribute('data-target', '#deleteEmployeeModal');
     }
     container?.appendChild(button)
